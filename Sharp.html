@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jessica Lynch — Fractional COO</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0B1E38;
+  --navy2:  #112646;
+  --sky:    #2B7FCC;
+  --sky-lt: #C8E0F5;
+  --ice:    #E8F3FC;
+  --gold:   #C9922E;
+  --gold-lt:#FDF3E0;
+  --white:  #FFFFFF;
+  --off:    #F5F8FC;
+  --ink:    #0B1E38;
+  --body:   #253C58;
+  --muted:  #6B87A4;
+  --rule:   #C4D7EC;
+}
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: #D6E2EE;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 20px;
+}
+
+/* ─── CARD SHELL ─── */
+.page {
+  width: 100%;
+  max-width: 1000px;
+  background: var(--white);
+  box-shadow: 0 4px 8px rgba(11,30,56,0.06), 0 16px 48px rgba(11,30,56,0.14), 0 48px 100px rgba(11,30,56,0.1);
+}
+
+/* ══════════════════════════════
+   ① TOP STRIP — brand line
+══════════════════════════════ */
+.topstrip {
+  background: var(--gold);
+  padding: 10px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topstrip .brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.topstrip .role-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--navy);
+  opacity: 0.7;
+}
+
+/* ══════════════════════════════
+   ② HERO — split layout
+══════════════════════════════ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  min-height: 320px;
+}
+
+/* Left: navy big type */
+.hero-left {
+  background: var(--navy);
+  padding: 52px 56px 48px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Background text watermark */
+.hero-left::before {
+  content: 'COO';
+  position: absolute;
+  bottom: -30px;
+  right: -10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 220px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-left h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(58px, 7vw, 88px);
+  font-weight: 900;
+  line-height: 0.92;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-left h1 .outline {
+  -webkit-text-stroke: 2px var(--sky);
+  color: transparent;
+}
+
+.hero-left h1 .gold-word {
+  color: var(--gold);
+}
+
+.hero-tagline {
+  margin-top: 28px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.55);
+  max-width: 380px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tagline strong {
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+}
+
+/* Right: photo + sky bg */
+.hero-right {
+  background: var(--sky);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 32px 32px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Large circle behind photo */
+.hero-right::before {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+
+.photo-container {
+  position: relative;
+  z-index: 1;
+  width: 200px;
+  height: 210px;
+  flex-shrink: 0;
+}
+
+.photo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 120px 120px 0 0;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-bottom: none;
+}
+
+.photo-name {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ══════════════════════════════
+   ③ BIG STATEMENT BAND
+══════════════════════════════ */
+.statement-band {
+  background: var(--navy2);
+  padding: 32px 56px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  border-top: 3px solid var(--sky);
+}
+
+.statement-band .big-line {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  line-height: 1.05;
+  flex-shrink: 0;
+}
+
+.statement-band .big-line em {
+  font-style: italic;
+  color: var(--sky);
+}
+
+.statement-band .sep {
+  width: 2px;
+  height: 52px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+
+.statement-band .sub-text {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.55);
+}
+
+.statement-band .sub-text strong {
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════
+   ④ OUTCOMES ROW
+══════════════════════════════ */
+.outcomes {
+  background: var(--gold);
+  padding: 0 56px;
+  display: flex;
+}
+
+.outcome {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 10px 14px 0;
+  border-right: 1px solid rgba(11,30,56,0.12);
+}
+
+.outcome:not(:first-child) { padding-left: 10px; }
+.outcome:last-child { border-right: none; }
+
+.outcome .tick {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--navy);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.outcome p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+/* ══════════════════════════════
+   ⑤ BODY GRID
+══════════════════════════════ */
+.body {
+  padding: 52px 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px 56px;
+}
+
+/* Section overline */
+.over {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.over::before {
+  content: '';
+  width: 18px;
+  height: 2px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.bh2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--navy);
+  line-height: 1.0;
+  margin-bottom: 22px;
+}
+
+.bh2 em {
+  font-style: italic;
+  color: var(--sky);
+  font-weight: 700;
+}
+
+/* ─── ENGAGEMENTS full width ─── */
+.engagements { grid-column: 1 / -1; }
+
+.eng-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 2px solid var(--navy);
+}
+
+.eng-card {
+  padding: 28px 22px;
+  border-right: 1px solid var(--rule);
+  position: relative;
+  transition: background 0.15s;
+  cursor: default;
+}
+
+.eng-card:last-child { border-right: none; }
+
+.eng-card:hover { background: var(--ice); }
+
+.eng-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--navy);
+  opacity: 0.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+
+.eng-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+  margin-bottom: 4px;
+  line-height: 1.1;
+}
+
+.eng-meta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.eng-meta::before {
+  content: '';
+  width: 12px;
+  height: 1.5px;
+  background: var(--gold);
+}
+
+.eng-card p {
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+/* Top accent per card */
+.eng-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.eng-card:nth-child(1)::after { background: var(--sky); }
+.eng-card:nth-child(2)::after { background: var(--gold); }
+.eng-card:nth-child(3)::after { background: var(--navy); }
+.eng-card:nth-child(4)::after { background: var(--sky); }
+
+/* ─── DELIVERS ─── */
+.dlist { display: flex; flex-direction: column; gap: 3px; }
+
+.drow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  cursor: default;
+  transition: background 0.12s;
+}
+
+.drow:hover { background: var(--ice); }
+
+.d-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--sky);
+  width: 28px;
+  flex-shrink: 0;
+  text-align: right;
+  padding-right: 8px;
+  opacity: 0.6;
+}
+
+.d-bar {
+  width: 2px;
+  height: 36px;
+  background: var(--rule);
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+
+.drow:hover .d-bar { background: var(--sky); }
+
+.d-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+}
+
+/* ─── CLIENTS ─── */
+.clist { display: flex; flex-direction: column; gap: 0; }
+
+.crow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 14px 14px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: default;
+  transition: padding-left 0.15s, background 0.12s;
+}
+
+.crow:last-child { border-bottom: none; }
+.crow:hover { padding-left: 10px; background: var(--ice); }
+
+.c-icon {
+  width: 36px; height: 36px;
+  background: var(--sky-lt);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.c-info strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  display: block;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.c-info span {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+/* ══════════════════════════════
+   ⑥ CTA FOOTER
+══════════════════════════════ */
+.cta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  background: var(--navy);
+  border-top: 4px solid var(--gold);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Large background type */
+.cta::before {
+  content: 'START';
+  position: absolute;
+  top: -20px;
+  left: 40px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 160px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.025);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+.cta-left {
+  padding: 44px 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-over {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cta-over::before { content: ''; width: 18px; height: 2px; background: var(--gold); }
+
+.cta-left h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(30px, 3.5vw, 44px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  line-height: 1.0;
+  margin-bottom: 8px;
+}
+
+.cta-left h2 em {
+  font-style: italic;
+  color: var(--sky);
+  font-weight: 700;
+}
+
+.cta-left p {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+}
+
+.cta-right {
+  padding: 44px 52px 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  min-width: 300px;
+  position: relative;
+  z-index: 1;
+  border-left: 1px solid rgba(255,255,255,0.07);
+}
+
+.cta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cta-ico {
+  width: 34px; height: 34px;
+  background: rgba(43,127,204,0.15);
+  border: 1px solid rgba(43,127,204,0.25);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.cta-ico svg {
+  width: 13px; height: 13px;
+  stroke: var(--sky); fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+
+.cta-row a {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.15s;
+}
+.cta-row a:hover { color: white; }
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  padding: 13px 24px;
+  background: var(--sky);
+  color: white;
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  transition: background 0.15s, transform 0.12s;
+}
+.cta-btn:hover { background: #2270b8; transform: translateY(-2px); }
+.cta-btn svg { width: 13px; height: 13px; stroke: white; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ══════════════════════════════
+   ANIMATIONS
+══════════════════════════════ */
+.topstrip, .hero, .statement-band, .outcomes, .body, .cta {
+  opacity: 0;
+  animation: up 0.5s ease forwards;
+}
+.hero           { animation-delay: 0.05s; }
+.statement-band { animation-delay: 0.1s; }
+.outcomes       { animation-delay: 0.14s; }
+.body           { animation-delay: 0.18s; }
+.cta            { animation-delay: 0.22s; }
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 720px) {
+  body { padding: 0; }
+  .page { box-shadow: none; }
+  .topstrip { padding: 10px 24px; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { height: 200px; }
+  .hero-left { padding: 36px 24px 32px; }
+  .statement-band { padding: 24px; flex-wrap: wrap; gap: 16px; }
+  .statement-band .sep { display: none; }
+  .outcomes { padding: 0 24px; flex-wrap: wrap; }
+  .outcome { flex: 0 0 50%; }
+  .body { padding: 36px 24px; grid-template-columns: 1fr; gap: 36px; }
+  .eng-grid { grid-template-columns: 1fr 1fr; }
+  .cta { grid-template-columns: 1fr; }
+  .cta-left { padding: 36px 24px; }
+  .cta-right { padding: 24px; border-left: none; border-top: 1px solid rgba(255,255,255,0.07); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ① TOP STRIP -->
+  <div class="topstrip">
+    <span class="brand">Lynch Fractional Logic</span>
+    <span class="role-badge">Fractional COO &nbsp;·&nbsp; Former Operating Executive</span>
+  </div>
+
+  <!-- ② HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <h1>
+        Decisive<br>
+        <span class="outline">Logic.</span><br>
+        <span class="gold-word">Scaleable</span><br>
+        Ops.
+      </h1>
+      <p class="hero-tagline">
+        I step in to install <strong>accountability</strong>, rebuild <strong>execution discipline</strong>, and design the operational infrastructure required to scale — <strong>without the chaos.</strong>
+      </p>
+    </div>
+    <div class="hero-right">
+      <div class="photo-container">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D4E03AQG5utcl3Bq9UA/profile-displayphoto-shrink_400_400/B4EZS8s5ReHoAg-/0/1738332673438?e=1775088000&v=beta&t=8NyMhDT7g5NfWOiVByUvTIcnU_leq_C062GXJPMJo_Y"
+          alt="Jessica Lynch"
+          crossorigin="anonymous"
+        >
+        <div class="photo-name"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ STATEMENT BAND -->
+  <div class="statement-band">
+    <div class="big-line">When Growth<br>Creates Complexity,<br><em>I Restore Control.</em></div>
+    <div class="sep"></div>
+    <p class="sub-text">As organizations grow, complexity compounds. Ownership blurs. Decisions slow. Execution becomes inconsistent. As a former COO scaling healthcare services and SaaS organizations, I bring the <strong>operational rigor and execution discipline</strong> that transforms complexity back into controlled, accountable growth.</p>
+  </div>
+
+  <!-- ④ OUTCOMES -->
+  <div class="outcomes">
+    <div class="outcome"><span class="tick">✓</span><p>Operational Clarity</p></div>
+    <div class="outcome"><span class="tick">✓</span><p>Accountability Installed</p></div>
+    <div class="outcome"><span class="tick">✓</span><p>KPI-Driven Decisions</p></div>
+    <div class="outcome"><span class="tick">✓</span><p>Leadership Aligned</p></div>
+    <div class="outcome"><span class="tick">✓</span><p>Systems Embedded</p></div>
+    <div class="outcome"><span class="tick">✓</span><p>Built to Scale</p></div>
+  </div>
+
+  <!-- ⑤ BODY -->
+  <div class="body">
+
+    <!-- ENGAGEMENTS -->
+    <div class="engagements">
+      <p class="over">How I Engage</p>
+      <h2 class="bh2">Four Ways to <em>Work Together</em></h2>
+      <div class="eng-grid">
+        <div class="eng-card">
+          <div class="eng-num">01</div>
+          <div class="eng-label">Fractional COO</div>
+          <p class="eng-meta">3–6+ mo &nbsp;·&nbsp; 4–8 days/mo</p>
+          <p>Embedded operational leadership. Accountability and discipline installed at the senior level — without full-time overhead.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-num">02</div>
+          <div class="eng-label">90-Day Sprint</div>
+          <p class="eng-meta">Fixed Scope · Rapid</p>
+          <p>Rapid diagnosis and correction of execution breakdowns. For organizations that cannot afford to wait for results.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-num">03</div>
+          <div class="eng-label">PE Readiness</div>
+          <p class="eng-meta">Growth · Exit Prep</p>
+          <p>Operationalize reporting, KPI rigor, and leadership structure built for investor scrutiny and the demands of scale.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-num">04</div>
+          <div class="eng-label">Interim Leadership</div>
+          <p class="eng-meta">Transitions · Gaps</p>
+          <p>Steady, experienced execution during leadership transitions or pivotal growth inflection points.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELIVERS -->
+    <div class="delivers">
+      <p class="over">What You Get</p>
+      <h2 class="bh2">Outcomes That <em>Move the Needle</em></h2>
+      <div class="dlist">
+        <div class="drow"><span class="d-num">01</span><div class="d-bar"></div><span class="d-text">Operational Clarity</span></div>
+        <div class="drow"><span class="d-num">02</span><div class="d-bar"></div><span class="d-text">Accountability Installed</span></div>
+        <div class="drow"><span class="d-num">03</span><div class="d-bar"></div><span class="d-text">Execution Disciplined</span></div>
+        <div class="drow"><span class="d-num">04</span><div class="d-bar"></div><span class="d-text">Leadership Aligned</span></div>
+        <div class="drow"><span class="d-num">05</span><div class="d-bar"></div><span class="d-text">KPI-Driven Decisions</span></div>
+        <div class="drow"><span class="d-num">06</span><div class="d-bar"></div><span class="d-text">Systems Embedded</span></div>
+        <div class="drow"><span class="d-num">07</span><div class="d-bar"></div><span class="d-text">Infrastructure to Scale</span></div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="clients">
+      <p class="over">Who I Work With</p>
+      <h2 class="bh2">Operators Built <em>for Growth</em></h2>
+      <div class="clist">
+        <div class="crow">
+          <div class="c-icon">🏥</div>
+          <div class="c-info">
+            <strong>Multi-Site Healthcare Operators</strong>
+            <span>Ortho & dental groups, specialty care networks</span>
+          </div>
+        </div>
+        <div class="crow">
+          <div class="c-icon">📈</div>
+          <div class="c-info">
+            <strong>PE-Backed & PE-Ready Platforms</strong>
+            <span>Founder-led growth platforms preparing for investment</span>
+          </div>
+        </div>
+        <div class="crow">
+          <div class="c-icon">💻</div>
+          <div class="c-info">
+            <strong>Healthcare SaaS & Tech-Enabled Services</strong>
+            <span>Seed to Series B stage organizations</span>
+          </div>
+        </div>
+        <div class="crow">
+          <div class="c-icon">⚖️</div>
+          <div class="c-info">
+            <strong>Specialty & Regulated Services</strong>
+            <span>Organizations navigating scale in complex environments</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ⑥ CTA FOOTER -->
+  <div class="cta">
+    <div class="cta-left">
+      <p class="cta-over">Start the Conversation</p>
+      <h2>If Your Growth is Outpacing<br>Your Operations — <em>Let's Talk.</em></h2>
+      <p>Or share with a CEO in your network who needs operational control.</p>
+    </div>
+    <div class="cta-right">
+      <div class="cta-row">
+        <div class="cta-ico">
+          <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><polyline points="2,4 8,9.5 14,4"/></svg>
+        </div>
+        <a href="mailto:jessica.lynch@lynch-logic.com">jessica.lynch@lynch-logic.com</a>
+      </div>
+      <div class="cta-row">
+        <div class="cta-ico">
+          <svg viewBox="0 0 16 16"><path d="M3 3h2.5l1.2 3L5 7.5s1.2 2.5 3.5 3.5L10 9.3l3 1.2v2.5a1 1 0 0 1-1 1C5.5 14 2 8.5 2 4a1 1 0 0 1 1-1z"/></svg>
+        </div>
+        <a href="tel:9852760449">(985) 276-0449</a>
+      </div>
+      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3hSalDHWMWE_QjbYEIBAAxqZoQ5WERywKzGb8bIDrRSa_iWhJA1iQSs2__hMXrvqdzo1GWunXm" class="cta-btn">
+        Schedule a Conversation
+        <svg viewBox="0 0 14 14"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg>
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

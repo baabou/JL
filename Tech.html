@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jessica Lynch — Fractional COO</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --steel: #1C2E4A;
+    --ice: #C8DFF5;
+    --electric: #3A8DFF;
+    --white: #F4F7FC;
+    --muted: #8A9BB5;
+    --accent: #00C9A7;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID NOISE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(58,141,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(58,141,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+    margin-bottom: 64px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .logo-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--electric);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 7vw, 80px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    color: var(--white);
+  }
+
+  .headline em {
+    font-style: normal;
+    color: var(--electric);
+  }
+
+  .sub-headline {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 420px;
+    font-weight: 300;
+  }
+
+  /* PHOTO */
+  .photo-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--electric);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .photo-wrap img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%);
+    border: 2px solid var(--electric);
+  }
+
+  .photo-label {
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  .photo-label strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .photo-label span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--electric);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--electric) 0%, transparent 100%);
+    margin-bottom: 56px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  /* ── POSITIONING STATEMENT ── */
+  .position-block {
+    margin-bottom: 64px;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,201,167,0.2);
+  }
+
+  .statement {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.05;
+    color: var(--ice);
+    margin-bottom: 20px;
+  }
+
+  .statement em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .statement-body {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  /* ── DELIVERABLES GRID ── */
+  .delivers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 64px;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .deliver-item {
+    background: var(--steel);
+    padding: 24px 20px;
+    border-top: 2px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .deliver-item:hover {
+    border-color: var(--electric);
+    background: #213352;
+  }
+
+  .deliver-item .icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .deliver-item strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .deliver-item p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── ENGAGEMENTS ── */
+  .engagements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 64px;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+
+  .engagement-card {
+    border: 1px solid rgba(58,141,255,0.15);
+    padding: 28px 24px;
+    background: rgba(28,46,74,0.4);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .engagement-card:hover {
+    border-color: rgba(58,141,255,0.4);
+  }
+
+  .engagement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--electric);
+  }
+
+  .engagement-card.accent::before {
+    background: var(--accent);
+  }
+
+  .engagement-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .engagement-card .meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--electric);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .engagement-card.accent .meta {
+    color: var(--accent);
+  }
+
+  .engagement-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── WHO I WORK WITH ── */
+  .clients {
+    margin-bottom: 64px;
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+
+  .client-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .client-tag {
+    border: 1px solid rgba(200,223,245,0.2);
+    padding: 10px 18px;
+    font-size: 13px;
+    color: var(--ice);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: all 0.2s;
+  }
+
+  .client-tag:hover {
+    background: rgba(58,141,255,0.1);
+    border-color: var(--electric);
+    color: var(--white);
+  }
+
+  /* ── CTA ── */
+  .cta-block {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 32px;
+    background: var(--electric);
+    padding: 40px 48px;
+    animation: fadeUp 0.7s 0.6s ease both;
+  }
+
+  .cta-block h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(24px, 3vw, 34px);
+    letter-spacing: 0.03em;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+
+  .cta-block p {
+    font-size: 13px;
+    color: rgba(10,22,40,0.7);
+    margin-top: 6px;
+    font-weight: 400;
+  }
+
+  .cta-contacts {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .cta-contacts a {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    text-decoration: none;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s;
+  }
+
+  .cta-contacts a:hover {
+    opacity: 0.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50%       { transform: scale(1.06); opacity: 0.15; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .page { padding: 40px 24px; }
+    header { grid-template-columns: 1fr; }
+    .photo-wrap { display: none; }
+    .delivers { grid-template-columns: 1fr 1fr; }
+    .engagements { grid-template-columns: 1fr; }
+    .cta-block { grid-template-columns: 1fr; }
+    .cta-contacts { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div>
+      <p class="logo-tag">Lynch Fractional Logic — Fractional COO</p>
+      <h1 class="headline">Decisive<br>Logic.<br><em>Scaleable</em><br>Ops.</h1>
+      <p class="sub-headline">Former COO & operating executive — scaling healthcare services and SaaS organizations from execution chaos to disciplined growth.</p>
+    </div>
+    <div class="photo-wrap">
+      <img src="https://media.licdn.com/dms/image/v2/D4E03AQG5utcl3Bq9UA/profile-displayphoto-shrink_400_400/B4EZS8s5ReHoAg-/0/1738332673438?e=1775088000&v=beta&t=8NyMhDT7g5NfWOiVByUvTIcnU_leq_C062GXJPMJo_Y" alt="Jessica Lynch">
+      <div class="photo-label">
+        <strong>Jessica Lynch</strong>
+        <span>Fractional COO</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- POSITIONING -->
+  <div class="position-block">
+    <p class="section-label">The Problem I Solve</p>
+    <h2 class="statement">When Growth Creates<br>Complexity, <em>I Restore Control.</em></h2>
+    <p class="statement-body">As organizations grow, complexity compounds. Ownership blurs. Decisions slow. Execution becomes inconsistent. I step in to install accountability, rebuild execution discipline, and design the operational infrastructure required to scale — without the chaos.</p>
+  </div>
+
+  <!-- WHAT TO EXPECT -->
+  <p class="section-label" style="animation: fadeUp 0.7s 0.3s ease both;">What You Get</p>
+  <div class="delivers">
+    <div class="deliver-item">
+      <span class="icon">◎</span>
+      <strong>Operational Clarity</strong>
+      <p>Ownership defined. Decisions unblocked. Execution consistent.</p>
+    </div>
+    <div class="deliver-item">
+      <span class="icon">◈</span>
+      <strong>Accountability Installed</strong>
+      <p>Clear ownership structures that hold at every level.</p>
+    </div>
+    <div class="deliver-item">
+      <span class="icon">▲</span>
+      <strong>KPI-Driven Decisions</strong>
+      <p>Metrics that matter, wired into every operating cadence.</p>
+    </div>
+    <div class="deliver-item">
+      <span class="icon">◆</span>
+      <strong>Leadership Aligned</strong>
+      <p>Unified direction across teams and functions.</p>
+    </div>
+    <div class="deliver-item">
+      <span class="icon">⬡</span>
+      <strong>Systems Embedded</strong>
+      <p>Workflows and processes that survive leadership transitions.</p>
+    </div>
+    <div class="deliver-item">
+      <span class="icon">↗</span>
+      <strong>Built to Scale</strong>
+      <p>Infrastructure designed to carry you into the next phase.</p>
+    </div>
+  </div>
+
+  <!-- HOW I ENGAGE -->
+  <p class="section-label" style="animation: fadeUp 0.7s 0.4s ease both;">How I Engage</p>
+  <div class="engagements">
+    <div class="engagement-card">
+      <h3>Fractional COO</h3>
+      <p class="meta">3–6+ months · 4–8 days/mo</p>
+      <p>Embedded operational leadership. I install accountability and execution discipline as a senior member of your leadership team — without the full-time overhead.</p>
+    </div>
+    <div class="engagement-card accent">
+      <h3>90-Day Stabilization</h3>
+      <p class="meta">Sprint · Fixed scope</p>
+      <p>Rapid diagnosis and correction of execution breakdowns. Fast signal, faster resolution. Ideal for organizations that can't afford to wait.</p>
+    </div>
+    <div class="engagement-card">
+      <h3>PE & Scale Readiness</h3>
+      <p class="meta">Growth · Exit prep</p>
+      <p>Operationalize reporting, KPI rigor, and leadership structure — built for the scrutiny of investors and the demands of scale.</p>
+    </div>
+    <div class="engagement-card accent">
+      <h3>Interim Leadership</h3>
+      <p class="meta">Transition · Inflection points</p>
+      <p>Steady, experienced execution during leadership gaps or pivotal growth moments. No disruption to momentum.</p>
+    </div>
+  </div>
+
+  <!-- WHO I WORK WITH -->
+  <div class="clients">
+    <p class="section-label">Who I Work With</p>
+    <div class="client-tags">
+      <span class="client-tag">Multi-site Healthcare Operators</span>
+      <span class="client-tag">Ortho & Dental Groups</span>
+      <span class="client-tag">PE-Backed Platforms</span>
+      <span class="client-tag">PE-Ready Founders</span>
+      <span class="client-tag">Healthcare SaaS (Seed–Series B)</span>
+      <span class="client-tag">Specialty & Regulated Services</span>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div>
+      <h2>If your growth is outpacing your operations — let's talk.</h2>
+      <p>Or share this with someone in your network who needs operational control.</p>
+    </div>
+    <div class="cta-contacts">
+      <a href="tel:9852760449">(985) 276-0449</a>
+      <a href="mailto:jessica.lynch@lynch-logic.com">jessica.lynch@lynch-logic.com</a>
+      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3hSalDHWMWE_QjbYEIBAAxqZoQ5WERywKzGb8bIDrRSa_iWhJA1iQSs2__hMXrvqdzo1GWunXm">Schedule a Call →</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
